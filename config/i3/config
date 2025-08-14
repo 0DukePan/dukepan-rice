@@ -1,0 +1,578 @@
+# ===================== Perfect i3 Rice Configuration =====================
+# Ultimate Catppuccin Mocha Theme + Advanced Features
+# Enhanced with Modern Window Management & Productivity Features
+# =====================================================================
+
+# ===================== Colors (Catppuccin Mocha) =====================
+set $rosewater #f5e0dc
+set $flamingo #f2cdcd
+set $pink #f5c2e7
+set $mauve #cba6f7
+set $red #f38ba8
+set $maroon #eba0ac
+set $peach #fab387
+set $yellow #f9e2af
+set $green #a6e3a1
+set $teal #94e2d5
+set $sky #89dceb
+set $sapphire #74c7ec
+set $blue #89b4fa
+set $lavender #b4befe
+set $text #cdd6f4
+set $subtext1 #bac2de
+set $subtext0 #a6adc8
+set $overlay2 #9399b2
+set $overlay1 #7f849c
+set $overlay0 #6c7086
+set $surface2 #585b70
+set $surface1 #45475a
+set $surface0 #313244
+set $base #1e1e2e
+set $mantle #181825
+set $crust #11111b
+
+# ===================== Window Colors =====================
+client.focused          $mauve $base $text $rosewater $mauve
+client.focused_inactive  $overlay0 $base $text $rosewater $overlay0
+client.unfocused         $overlay0 $base $text $rosewater $overlay0
+client.urgent            $peach $base $peach $overlay0 $peach
+client.placeholder       $overlay0 $base $text $overlay0 $overlay0
+client.background        $base
+
+# ===================== Font & Appearance =====================
+font pango:JetBrainsMono Nerd Font Medium 11
+
+# Window borders and styling
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+title_align center
+
+# Gaps configuration
+gaps inner 15
+gaps outer 10
+gaps horizontal 5
+gaps vertical 5
+smart_gaps inverse_outer
+smart_borders on
+
+# Focus and mouse behavior
+focus_follows_mouse no
+mouse_warping none
+workspace_auto_back_and_forth yes
+focus_wrapping workspace
+focus_on_window_activation smart
+show_marks yes
+
+# ===================== Advanced Window Management Features =====================
+# Smart window swallowing configuration
+exec_always --no-startup-id ~/.local/bin/window-swallower.sh
+
+# Intelligent focus follows mouse with exclusions
+exec_always --no-startup-id ~/.local/bin/smart-focus.sh
+
+# Gesture support integration
+exec --no-startup-id libinput-gestures-setup start
+
+# Window transparency for inactive windows
+exec_always --no-startup-id ~/.local/bin/window-transparency.sh
+
+# ===================== Enhanced Window Rules =====================
+# Floating windows
+for_window [class="Lxappearance"] floating enable, resize set 800 600
+for_window [class="Pavucontrol"] floating enable, resize set 700 500
+for_window [class="Blueman-manager"] floating enable, resize set 600 400
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="Thunar" title="File Operation Progress"] floating enable
+for_window [class="Gnome-calculator"] floating enable, resize set 350 500
+for_window [class="Gnome-system-monitor"] floating enable, resize set 800 600
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+# Picture-in-picture windows
+for_window [title="Picture-in-Picture"] floating enable, sticky enable, resize set 400 225, move position 1500 850
+
+# Steam windows
+for_window [class="Steam" title="^Steam$"] floating disable
+for_window [class="Steam" title="Steam - News"] floating enable
+for_window [class="Steam" title=".* - Chat"] floating enable
+for_window [class="Steam" title="^Settings$"] floating enable
+for_window [class="Steam" title=".* - event started"] floating enable
+for_window [class="Steam" title=".* CD key"] floating enable
+for_window [class="Steam" title="^Steam - Self Updater$"] floating enable
+for_window [class="Steam" title="^Screenshot Uploader$"] floating enable
+for_window [class="Steam" title="^Steam Guard - Computer Authorization Required$"] floating enable
+
+# Development tools
+for_window [class="GitKraken"] move to workspace $ws3
+for_window [class="Postman"] move to workspace $ws3
+
+# Development environment rules
+for_window [class="Code"] layout tabbed
+for_window [class="jetbrains-.*"] layout tabbed
+for_window [title=".*vim.*"] layout default
+
+# Browser tab management
+for_window [class="firefox" window_role="browser"] layout tabbed
+for_window [class="brave-browser"] layout tabbed
+
+# Terminal multiplexing
+for_window [class="Alacritty" title="tmux.*"] layout default
+for_window [class="kitty" title=".*@.*"] layout splith
+
+# Media and design applications
+for_window [class="Gimp"] layout default, focus
+for_window [class="Blender"] layout default, focus
+for_window [class="obs"] layout default, focus
+
+# Communication apps with smart positioning
+for_window [class="discord"] layout stacking, move to workspace $ws4
+for_window [class="TelegramDesktop"] layout stacking, move to workspace $ws4
+for_window [class="Slack"] layout tabbed, move to workspace $ws4
+
+# Gaming optimizations
+for_window [class="Steam" title="^Steam$"] layout tabbed
+for_window [class=".*game.*" title=".*"] fullscreen enable, move to workspace $ws8
+for_window [instance=".*game.*"] fullscreen enable, move to workspace $ws8
+
+# Virtual machine management
+for_window [class="VirtualBox Machine"] fullscreen enable, move to workspace $ws9
+for_window [class="Virt-manager"] layout default, move to workspace $ws9
+
+# ===================== Workspace Configuration =====================
+set $ws1 "1:  Terminal"
+set $ws2 "2:  Browser"
+set $ws3 "3:  Code"
+set $ws4 "4:  Chat"
+set $ws5 "5:  Media"
+set $ws6 "6:  Files"
+set $ws7 "7:  Graphics"
+set $ws8 "8:  Games"
+set $ws9 "9:  VM"
+set $ws10 "10:  System"
+
+# Workspace assignments
+assign [class="firefox|Firefox|brave-browser|Brave-browser|chromium|Chromium"] $ws2
+assign [class="Code|code-oss|VSCodium|Atom|Sublime_text"] $ws3
+assign [class="discord|Discord|TelegramDesktop|Slack|teams-for-linux"] $ws4
+assign [class="Spotify|spotify|vlc|VLC|mpv|Audacity"] $ws5
+assign [class="Thunar|thunar|Nemo|nemo|Nautilus|nautilus"] $ws6
+assign [class="Gimp|gimp|Inkscape|inkscape|Blender|blender"] $ws7
+assign [class="Steam|steam|lutris|Lutris|minecraft|Minecraft"] $ws8
+assign [class="VirtualBox|virtualbox|Virt-manager|virt-manager"] $ws9
+assign [class="Htop|htop|Gnome-system-monitor|gnome-system-monitor"] $ws10
+
+# ===================== Enhanced Autostart =====================
+# Core system services
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+
+# Screen locking
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy --nofork
+
+# Network and Bluetooth
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+
+# Audio
+exec --no-startup-id pipewire
+exec --no-startup-id pipewire-pulse
+exec --no-startup-id wireplumber
+
+# Visual components
+exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id dunst
+
+# Utilities
+exec --no-startup-id flameshot
+exec --no-startup-id redshift-gtk
+exec --no-startup-id clipit
+exec --no-startup-id autorandr --change
+
+# Startup applications
+exec --no-startup-id i3-msg 'workspace $ws1; exec alacritty'
+
+# ===================== Key Bindings =====================
+set $mod Mod4
+set $alt Mod1
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+# ===================== Core Bindings =====================
+# Terminal applications
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec kitty
+bindsym $mod+$alt+Return exec alacritty --class floating-terminal
+bindsym $mod+t exec alacritty -e tmux
+
+# Window management
+bindsym $mod+q kill
+bindsym $mod+Shift+q [con_id="__focused__" instance="^(?!dropdown_).*"] kill
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# ===================== Application Launchers =====================
+# Rofi menus
+bindsym $mod+d exec "rofi -modi drun,run -show drun -theme ~/.config/rofi/themes/launcher.rasi"
+bindsym $mod+Tab exec "rofi -modi window -show window -theme ~/.config/rofi/themes/launcher.rasi"
+bindsym $mod+c exec "rofi -modi calc -show calc -theme ~/.config/rofi/themes/launcher.rasi"
+bindsym $mod+v exec "~/.config/rofi/scripts/clipboard-manager.sh"
+bindsym $mod+p exec "rofi -modi ssh -show ssh -theme ~/.config/rofi/themes/launcher.rasi"
+
+# Quick application access
+bindsym $mod+b exec brave-browser
+bindsym $mod+e exec thunar
+bindsym $mod+m exec alacritty -e htop
+bindsym $mod+n exec code
+bindsym $mod+Shift+b exec firefox
+
+# System utilities
+bindsym $mod+i exec ~/.config/rofi/scripts/system-info.sh
+bindsym $mod+Shift+s exec ~/.config/rofi/scripts/screenshot-menu.sh
+
+# ===================== Media and System Controls =====================
+# Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
+
+# Brightness controls
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
+# Screenshot controls
+bindsym Print exec flameshot gui
+bindsym Shift+Print exec flameshot screen
+bindsym $mod+Print exec flameshot full -p ~/Pictures/Screenshots
+bindsym $mod+Shift+Print exec scrot -s ~/Pictures/Screenshots/screenshot_%Y%m%d_%H%M%S.png
+
+# Power management
+bindsym $mod+Shift+e exec "~/.config/rofi/scripts/powermenu.sh"
+bindsym $mod+l exec i3lock-fancy
+bindsym $mod+Shift+l exec systemctl suspend
+
+# ===================== Advanced Navigation =====================
+# Focus movement (Vim-style + Arrows)
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move windows
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Move workspaces between monitors
+bindsym $mod+Ctrl+h move workspace to output left
+bindsym $mod+Ctrl+j move workspace to output down
+bindsym $mod+Ctrl+k move workspace to output up
+bindsym $mod+Ctrl+l move workspace to output right
+
+# ===================== Layout Management =====================
+# Split orientation
+bindsym $mod+apostrophe split h
+bindsym $mod+slash split v
+
+# Layout modes
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+x layout toggle split
+
+# Fullscreen and floating
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# Focus parent/child
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
+
+# Sticky windows
+bindsym $mod+Shift+s sticky toggle
+
+# ===================== Advanced Scratchpad System =====================
+# Main scratchpad
+for_window [class="Alacritty" instance="scratchpad"] move to scratchpad, resize set 1200 800
+bindsym $mod+grave exec --no-startup-id "alacritty --class scratchpad --title scratchpad"
+bindsym $mod+Shift+grave scratchpad show
+
+# Calculator scratchpad
+for_window [class="Gnome-calculator" instance="calculator"] move to scratchpad
+bindsym $mod+equal exec --no-startup-id "gnome-calculator"
+
+# File manager scratchpad
+for_window [class="Thunar" instance="scratchpad-files"] move to scratchpad, resize set 1000 700
+bindsym $mod+Shift+e exec --no-startup-id "thunar"
+
+# Music player scratchpad
+for_window [class="Spotify"] move to scratchpad, resize set 1200 800
+bindsym $mod+Shift+m scratchpad show
+
+# ===================== Workspace Management =====================
+# Switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Move container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Move and follow to workspace
+bindsym $mod+Ctrl+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+Ctrl+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+Ctrl+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+Ctrl+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+Ctrl+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+Ctrl+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+Ctrl+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+Ctrl+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+Ctrl+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+Ctrl+0 move container to workspace number $ws10; workspace number $ws10
+
+# Workspace navigation
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+Up workspace back_and_forth
+
+# ===================== Advanced Modes =====================
+# Resize mode
+mode "resize" {
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+    
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    
+    # Fine-grained resizing
+    bindsym Shift+h resize shrink width 1 px or 1 ppt
+    bindsym Shift+j resize grow height 1 px or 10 ppt
+    bindsym Shift+k resize shrink height 1 px or 10 ppt
+    bindsym Shift+l resize grow width 1 px or 10 ppt
+    
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Gaps mode
+mode "gaps" {
+    bindsym plus gaps inner current plus 5
+    bindsym minus gaps inner current minus 5
+    bindsym 0 gaps inner current set 0
+    
+    bindsym Shift+plus gaps outer current plus 5
+    bindsym Shift+minus gaps outer current minus 5
+    bindsym Shift+0 gaps outer current set 0
+    
+    bindsym d gaps inner current set 15; gaps outer current set 10
+    
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+g mode "default"
+}
+bindsym $mod+g mode "gaps"
+
+# System mode
+mode "system" {
+    bindsym l exec i3lock-fancy, mode "default"
+    bindsym s exec systemctl suspend, mode "default"
+    bindsym h exec systemctl hibernate, mode "default"
+    bindsym r exec systemctl reboot, mode "default"
+    bindsym p exec systemctl poweroff, mode "default"
+    bindsym e exec i3-msg exit, mode "default"
+    
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+Shift+s mode "default"
+}
+bindsym $mod+Shift+s mode "system"
+
+# Window management mode
+mode "window" {
+    # Move windows
+    bindsym h move left 20px
+    bindsym j move down 20px
+    bindsym k move up 20px
+    bindsym l move right 20px
+    
+    # Resize windows
+    bindsym Shift+h resize shrink width 20px
+    bindsym Shift+j resize grow height 20px
+    bindsym Shift+k resize shrink height 20px
+    bindsym Shift+l resize grow width 20px
+    
+    # Change layouts
+    bindsym s layout stacking
+    bindsym t layout tabbed
+    bindsym d layout default
+    bindsym v layout splitv
+    bindsym b layout splith
+    
+    # Toggle states
+    bindsym f fullscreen toggle
+    bindsym space floating toggle
+    bindsym Shift+s sticky toggle
+    
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+w mode "default"
+}
+bindsym $mod+w mode "window"
+
+# Monitor management mode
+mode "monitor" {
+    # Move workspaces between monitors
+    bindsym h move workspace to output left
+    bindsym j move workspace to output down
+    bindsym k move workspace to output up
+    bindsym l move workspace to output right
+    
+    # Focus monitors
+    bindsym Shift+h focus output left
+    bindsym Shift+j focus output down
+    bindsym Shift+k focus output up
+    bindsym Shift+l focus output right
+    
+    # Display configuration
+    bindsym a exec autorandr --change
+    bindsym d exec arandr
+    bindsym m exec ~/.local/bin/monitor-setup.sh
+    
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+Shift+m mode "default"
+}
+bindsym $mod+Shift+m mode "monitor"
+
+# ===================== Advanced Keybindings =====================
+# Smart window swallowing toggle
+bindsym $mod+Shift+w exec ~/.local/bin/toggle-swallowing.sh
+
+# Intelligent window focusing
+bindsym $mod+Ctrl+Tab exec ~/.local/bin/smart-window-switcher.sh
+bindsym $mod+Shift+Tab exec ~/.local/bin/smart-window-switcher.sh --reverse
+
+# Advanced window movement
+bindsym $mod+Ctrl+Shift+h move container to output left; focus output left
+bindsym $mod+Ctrl+Shift+j move container to output down; focus output down
+bindsym $mod+Ctrl+Shift+k move container to output up; focus output up
+bindsym $mod+Ctrl+Shift+l move container to output right; focus output right
+
+# Window swapping
+bindsym $mod+Shift+Return mark --add "_swap", focus left, swap container with mark "_swap", unmark "_swap"
+bindsym $mod+Ctrl+Return mark --add "_swap", focus right, swap container with mark "_swap", unmark "_swap"
+
+# Container manipulation
+bindsym $mod+Shift+o split toggle
+bindsym $mod+o layout toggle all
+bindsym $mod+Shift+f fullscreen toggle global
+
+# Advanced scratchpad management
+bindsym $mod+Shift+grave [instance="scratchpad"] scratchpad show
+bindsym $mod+Ctrl+grave exec ~/.local/bin/scratchpad-manager.sh
+
+# Window transparency controls
+bindsym $mod+Ctrl+plus exec ~/.local/bin/adjust-transparency.sh +10
+bindsym $mod+Ctrl+minus exec ~/.local/bin/adjust-transparency.sh -10
+bindsym $mod+Ctrl+0 exec ~/.local/bin/adjust-transparency.sh reset
+
+# ===================== Workspace-Specific Behaviors =====================
+# Workspace 1: Terminal-focused layout
+exec --no-startup-id "i3-msg 'workspace $ws1; layout splith'"
+
+# Workspace 2: Browser with tab management
+exec --no-startup-id "i3-msg 'workspace $ws2; layout tabbed'"
+
+# Workspace 3: Development environment
+exec --no-startup-id "i3-msg 'workspace $ws3; layout splitv'"
+
+# Workspace 4: Communication stack
+exec --no-startup-id "i3-msg 'workspace $ws4; layout stacking'"
+
+# Workspace 5: Media center
+exec --no-startup-id "i3-msg 'workspace $ws5; layout default'"
+
+# ===================== Advanced Focus Management =====================
+# Focus urgent windows automatically
+for_window [urgent=latest] focus
+
+# Smart focus wrapping
+focus_wrapping workspace
+
+# Enhanced parent/child navigation
+bindsym $mod+bracketleft focus parent
+bindsym $mod+bracketright focus child
+
+# Focus by direction with wrapping
+bindsym $mod+Ctrl+h focus left; focus left
+bindsym $mod+Ctrl+j focus down; focus down  
+bindsym $mod+Ctrl+k focus up; focus up
+bindsym $mod+Ctrl+l focus right; focus right
+
+# ===================== Startup Enhancements =====================
+# Initialize workspace layouts with smart arrangement
+exec_always --no-startup-id ~/.local/bin/workspace-layouts.sh monitor
+
+# Start dynamic wallpaper system
+exec --no-startup-id ~/.local/bin/dynamic-wallpaper.sh daemon
+
+# Initialize smart focus management
+exec --no-startup-id ~/.local/bin/smart-focus.sh --daemon
+
+# Start window swallowing service
+exec --no-startup-id ~/.local/bin/window-swallower.sh --daemon
+
+# Initialize gesture support
+exec --no-startup-id ~/.local/bin/gesture-handler.sh --start
+
+# ===================== IPC and External Control =====================
+# Enable IPC for external scripts
+ipc-socket ~/.i3/ipc-socket.%i
+
+# Restart polybar on workspace change
+exec_always --no-startup-id "i3-msg -t subscribe -m '[ \"workspace\" ]' | while read line; do ~/.config/polybar/launch.sh; done"

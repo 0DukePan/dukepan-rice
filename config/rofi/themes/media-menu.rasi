@@ -1,0 +1,170 @@
+/*
+ * Media Menu Theme - Ultimate i3 Rice
+ * Beautiful Catppuccin-themed media control interface
+ */
+
+@theme "/dev/null"
+
+* {
+    /* Catppuccin Mocha Colors */
+    bg: #1e1e2e;
+    bg-alt: #313244;
+    bg-selected: #45475a;
+    fg: #cdd6f4;
+    fg-alt: #bac2de;
+    border: #6c7086;
+    primary: #cba6f7;
+    secondary: #89b4fa;
+    success: #a6e3a1;
+    warning: #f9e2af;
+    error: #f38ba8;
+    
+    /* Spacing and sizing */
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+    
+    /* Typography */
+    font: "JetBrainsMono Nerd Font 12";
+    text-color: @fg;
+    background-color: transparent;
+}
+
+window {
+    location: center;
+    anchor: center;
+    width: 600px;
+    height: 400px;
+    
+    background-color: @bg;
+    border: 2px solid @border;
+    border-radius: 12px;
+    
+    children: [mainbox];
+}
+
+mainbox {
+    spacing: 0;
+    children: [inputbar, listview, mode-switcher];
+}
+
+inputbar {
+    padding: 20px;
+    background-color: @bg-alt;
+    border-radius: 12px 12px 0 0;
+    
+    children: [prompt, entry];
+}
+
+prompt {
+    text-color: @primary;
+    font: "JetBrainsMono Nerd Font Bold 14";
+    margin: 0 10px 0 0;
+}
+
+entry {
+    placeholder: "Search media...";
+    placeholder-color: @fg-alt;
+    text-color: @fg;
+}
+
+listview {
+    padding: 10px;
+    spacing: 5px;
+    scrollbar: true;
+    
+    lines: 8;
+    columns: 1;
+    
+    background-color: @bg;
+}
+
+element {
+    padding: 12px 16px;
+    border-radius: 8px;
+    
+    orientation: horizontal;
+    children: [element-icon, element-text];
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @bg-selected;
+    text-color: @primary;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element-icon {
+    size: 24px;
+    margin: 0 12px 0 0;
+    text-color: inherit;
+}
+
+element-text {
+    text-color: inherit;
+    vertical-align: 0.5;
+}
+
+scrollbar {
+    width: 4px;
+    border: 0;
+    handle-color: @primary;
+    handle-width: 4px;
+    padding: 0 4px;
+}
+
+mode-switcher {
+    padding: 10px;
+    background-color: @bg-alt;
+    border-radius: 0 0 12px 12px;
+    
+    spacing: 10px;
+}
+
+button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    
+    background-color: transparent;
+    text-color: @fg-alt;
+    
+    font: "JetBrainsMono Nerd Font 10";
+}
+
+button selected {
+    background-color: @primary;
+    text-color: @bg;
+}
+
+/* Media-specific styling */
+element.media-playing {
+    background-color: fade(@success, 20%);
+    border: 1px solid @success;
+}
+
+element.media-paused {
+    background-color: fade(@warning, 20%);
+    border: 1px solid @warning;
+}
+
+element.media-stopped {
+    background-color: fade(@error, 20%);
+    border: 1px solid @error;
+}
+
+/* Animation */
+element {
+    transition: background-color 200ms ease;
+}
+
+button {
+    transition: all 200ms ease;
+}

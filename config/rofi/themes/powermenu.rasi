@@ -1,0 +1,50 @@
+/**
+ * Perfect i3 Rice - Power Menu Theme
+ * Catppuccin Mocha Colors
+ */
+
+@theme "/dev/null"
+
+* {
+    bg: #1e1e2e;
+    fg: #cdd6f4;
+    
+    background-color: @bg;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+    font: "JetBrainsMono Nerd Font 14";
+}
+
+window {
+    width: 20%;
+    background-color: @bg;
+    border: 2px;
+    border-color: #f38ba8;
+    border-radius: 12px;
+}
+
+element {
+    padding: 12 16;
+    text-color: @fg;
+    background-color: transparent;
+}
+
+element selected {
+    text-color: #1e1e2e;
+    background-color: #f38ba8;
+    border-radius: 8px;
+}
+
+listview {
+    background-color: @bg;
+    columns: 1;
+    lines: 4;
+    padding: 16;
+}
+
+mainbox {
+    background-color: @bg;
+    children: [listview];
+}

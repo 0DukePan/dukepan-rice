@@ -1,0 +1,97 @@
+/**
+ * Perfect i3 Rice - Rofi Launcher Theme
+ * Catppuccin Mocha Colors
+ */
+
+configuration {
+    modi: "run,drun,window,ssh,calc,clipboard";
+    terminal: "alacritty";
+    hide-scrollbar: true;
+    show-icons: true;
+    sidebar-mode: false;
+    disable-history: false;
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+@theme "/dev/null"
+
+* {
+    bg: #1e1e2e;
+    bg-alt: #313244;
+    fg: #cdd6f4;
+    fg-alt: #6c7086;
+    
+    background-color: @bg;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    width: 30%;
+    background-color: @bg;
+    border: 2px;
+    border-color: #cba6f7;
+    border-radius: 12px;
+}
+
+element {
+    padding: 8 12;
+    text-color: @fg;
+    background-color: transparent;
+}
+
+element selected {
+    text-color: #1e1e2e;
+    background-color: #cba6f7;
+    border-radius: 8px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    vertical-align: 0.5;
+}
+
+element-icon {
+    size: 24;
+    background-color: transparent;
+}
+
+entry {
+    background-color: @bg-alt;
+    padding: 12;
+    text-color: @fg;
+    border-radius: 8px;
+    margin: 0 0 8 0;
+}
+
+inputbar {
+    children: [prompt, entry];
+    background-color: @bg;
+    padding: 16;
+}
+
+listview {
+    background-color: @bg;
+    columns: 1;
+    lines: 8;
+    padding: 0 16 16 16;
+}
+
+mainbox {
+    background-color: @bg;
+    children: [inputbar, listview];
+}
+
+prompt {
+    background-color: #cba6f7;
+    enabled: true;
+    padding: 12 16;
+    text-color: #1e1e2e;
+    border-radius: 8px;
+    margin: 0 8 0 0;
+}

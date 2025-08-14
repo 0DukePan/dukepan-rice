@@ -1,0 +1,114 @@
+[global]
+    monitor = 0
+    follow = mouse
+    width = (250, 400)
+    height = 300
+    origin = top-right
+    offset = 15x45
+    scale = 0
+    notification_limit = 5
+
+    progress_bar = true
+    progress_bar_height = 12
+    progress_bar_frame_width = 2
+    progress_bar_min_width = 150
+    progress_bar_max_width = 350
+    progress_bar_corner_radius = 6
+
+    indicate_hidden = yes
+    transparency = 10
+    separator_height = 3
+    padding = 12
+    horizontal_padding = 15
+    text_icon_padding = 8
+    frame_width = 2
+    frame_color = "#cba6f7"
+    separator_color = "#6c7086"
+    sort = yes
+    gap_size = 8
+
+    font = JetBrainsMono Nerd Font 11
+    line_height = 2
+    markup = full
+    format = "<span size='large'>%s</span>\n<span alpha='80%'>%b</span>"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = 60
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+
+    icon_position = left
+    min_icon_size = 24
+    max_icon_size = 48
+    icon_path = /usr/share/icons/Papirus-Dark/16x16/status/:/usr/share/icons/Papirus-Dark/16x16/devices/:/usr/share/icons/Papirus-Dark/16x16/apps/
+
+    sticky_history = yes
+    history_length = 50
+
+    dmenu = /usr/bin/rofi -dmenu -p "Select notification:"
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    corner_radius = 15
+    ignore_dbusclose = false
+    animation = true
+    animation_step = 10
+    animation_length = 300
+
+    force_xwayland = false
+    force_xinerama = false
+
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = close_current
+    mouse_right_click = context_all
+
+[experimental]
+    per_monitor_dpi = false
+
+[urgency_low]
+    background = "#1e1e2e"
+    foreground = "#a6adc8"
+    frame_color = "#89b4fa"
+    timeout = 8
+    default_icon = /usr/share/icons/Papirus-Dark/16x16/status/dialog-information.svg
+
+[urgency_normal]
+    background = "#1e1e2e"
+    foreground = "#cdd6f4"
+    frame_color = "#cba6f7"
+    timeout = 10
+    default_icon = /usr/share/icons/Papirus-Dark/16x16/status/dialog-information.svg
+
+[urgency_critical]
+    background = "#1e1e2e"
+    foreground = "#f38ba8"
+    frame_color = "#f38ba8"
+    timeout = 0
+    default_icon = /usr/share/icons/Papirus-Dark/16x16/status/dialog-error.svg
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+    context = ctrl+shift+period
+
+[spotify]
+    appname = "Spotify"
+    format = "<b>♪ %s</b>\n%b"
+    background = "#1db954"
+    foreground = "#ffffff"
+    timeout = 5
+
+[volume]
+    appname = "volume"
+    format = "<b>🔊 Volume</b>\n%b"
+    timeout = 2
+
+[brightness]
+    appname = "brightness"
+    format = "<b>☀ Brightness</b>\n%b"
+    timeout = 2
