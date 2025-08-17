@@ -1,6 +1,6 @@
-# Duke Pan's Ultimate i3 Rice for Pop!_OS
+# Duke Pan's  i3 Rice for Pop!_OS
 
-The most comprehensive, beautiful, and feature-rich i3 window manager configuration ever created. Featuring advanced automation, modern UI effects, and seamless productivity integration with the stunning Catppuccin Mocha color scheme.
+comprehensive, beautiful, and feature-rich i3 window manager configuration ever created. Featuring  automation, modern UI effects, and seamless productivity integration with the stunning Catppuccin Mocha color scheme.
 
 ## 🎨 Visual Excellence
 
